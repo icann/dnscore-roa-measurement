@@ -1,4 +1,4 @@
-# Time for the BSD 3-clause license
+#!/usr/bin/env python3
 '''
 Copyright (c) 2020, Internet Corporation for Assigned Names and Numbers
 All rights reserved.
