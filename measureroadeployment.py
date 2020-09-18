@@ -1,4 +1,4 @@
-# Time for the BSD 3-clause license
+#!/usr/bin/env python3
 '''
 Copyright (c) 2020, Internet Corporation for Assigned Names and Numbers
 All rights reserved.
@@ -60,7 +60,8 @@ def getobject (url):
 		response = requests.get(url)
 		response.raise_for_status()
 	except:
-		print (f'Failed to load {url}')
+		if os.isatty (sys.stdin.fileno()):
+			print (f'Failed to load {url}')
 		sys.exit()
 	return response.text
 #end def getobject
@@ -358,7 +359,8 @@ def make_dnsop_table (zones):
 			housedetailedreports.append(f"{housedict['tldcount']:6}|{housedict['ccTLDcount']:6}|{housedict['gTLDcount']:6}|{housedict['revMapcount']:6}|{housedict['zonecount']:6}|{housedict['NScount']:6}|{housedict['ADDRcount']:6}|{housedict['total']:6}|{housedict['yes']:6}|{housedict['pct']:5.1f}%|{house_title(house,short=True)}")
 			housereports.append(f"{housedict['tldcount']:6}|{housedict['ccTLDcount']:6}|{housedict['gTLDcount']:6}|{housedict['revMapcount']:6}|{housedict['pct']:5.1f}%|{house_title(house,short=True)}")
 		else:
-			print (f'no routes for {house_title(house,short=True)}')
+			if os.isatty (sys.stdin.fileno()):
+				print (f'no routes for {house_title(house,short=True)}')
 
 	tabledetailedlines=f'{"TLDs":6}|{"ccTLDs":6}|{"gTLDs":6}|{"revMap":6}|{"NSRR":6}|{"AddrRR":6}|{"RteOri":6}|{"ROAs":6}|{"Cover":6}|{"House":6}'
 	tabledetailedlines+='\n'
